@@ -6,9 +6,11 @@
 package javaio2;
 
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
+
+import java.util.ArrayList;
+import javaio2.controler.ManegeDate;
+import javaio2.model.Person;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -20,35 +22,30 @@ public class JavaIO2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
               
-       ManageData manege = new ManageData();
        
-       HashSet<String>  lista ;
-       
-       for(int ind=0; ind< 100; ind++  ){
-           
-           manege.Save( String.valueOf(ind));
-           System.out.println("incluido -> "+ind);
+        ArrayList<Person> peaple = new ArrayList<>();
+        ManegeDate manage = new ManegeDate();
+  
+        
+      
+         String Name = JOptionPane.showInputDialog("Type the name");
+         int age = Integer.parseInt( JOptionPane.showInputDialog("Type the age"));
+         double salary = Double.parseDouble( JOptionPane.showInputDialog("Type the  salary") ); 
+     
+        manage.Save(new Person(Name,age,salary));
+       // sava
+   
+        manage.GetObjects(peaple);
+        // ler
+        System.out.println(""+peaple.size());
+        
+       for(Person ObjPessoa :  peaple ){
+           System.out.println(ObjPessoa.getName()+ObjPessoa.getAge());
        }
         
-        
-        lista = manege.getAll();        
-        System.out.println("Numero da Lista   "+lista.size() );
-       
-        Iterator<String> interator = lista.iterator();
-        
-        while(interator.hasNext()){
-       
-         String  valor =  interator.next();
-         System.out.println(valor);
-        
-        }
-        
-        
-        
-     
-        manege.Close();
+    manage.CloseFile();
     }
     
 }
